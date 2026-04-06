@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>슈닝 배너 디자인 시안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0095FF;
+      --blue-dark: #003C8C;
+      --orange: #FF6B35;
+      --white: #ffffff;
+      --radius: 20px;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #eef0f4;
+      padding: 48px 36px 80px;
+    }
+
+    .page-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #999;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .download-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+      margin-bottom: 36px;
+      padding: 14px 16px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid #e8eaef;
+    }
+
+    .download-bar button {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .download-bar button:hover { background: #0080e0; }
+    .download-bar button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .download-bar button.secondary {
+      background: #fff;
+      color: var(--blue);
+    }
+
+    .download-bar button.secondary:hover { background: #f0f8ff; }
+
+    .download-note {
+      width: 100%;
+      font-size: 11px;
+      color: #888;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .download-note code {
+      font-size: 10px;
+      background: #f0f2f5;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .help-display {
+      margin-bottom: 24px;
+      padding: 14px 16px;
+      background: #f8f9fc;
+      border: 1px dashed #c5cdd8;
+      border-radius: 10px;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .editor-panel {
+      margin-bottom: 28px;
+      padding: 0;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e0e4ec;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .editor-panel summary {
+      cursor: pointer;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .editor-panel summary::-webkit-details-marker { display: none; }
+    .editor-panel summary::before {
+      content: '▸';
+      font-size: 11px;
+      opacity: 0.6;
+      transition: transform 0.15s;
+    }
+    .editor-panel details[open] summary::before { transform: rotate(90deg); }
+
+    .editor-panel .editor-inner {
+      padding: 0 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .editor-panel label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .editor-panel input[type="text"],
+    .editor-panel textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 12px;
+      padding: 8px 10px;
+      border: 1px solid #d8dde8;
+      border-radius: 8px;
+      resize: vertical;
+    }
+
+    .editor-panel textarea { min-height: 72px; line-height: 1.5; }
+
+    .editor-panel .file-upload-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .editor-panel .file-upload-row .file-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #666;
+    }
+    .editor-panel input[type="file"] {
+      font-size: 11px;
+      max-width: 100%;
+    }
+    .editor-panel .file-upload-row button.mini {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #666;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+    }
+    .editor-panel .file-upload-row .upload-status {
+      font-size: 10px;
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .editor-panel .hint {
+      font-size: 10px;
+      color: #999;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .editor-panel .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .editor-panel .btn-row button {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .editor-panel .btn-row button.ghost {
+      background: #fff;
+      color: #666;
+      border-color: #ccc;
+    }
+
+    .section { margin-bottom: 72px; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .section-title { font-size: 18px; font-weight: 700; color: #1a1d2e; }
+    .section-sub { font-size: 12px; color: #aaa; font-weight: 400; }
+
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .variant { display: flex; flex-direction: column; gap: 10px; }
+
+    .v-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: #bbb;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-left: 2px;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
+    }
+
+    .card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover img { transform: scale(1.06); }
+
+    /* 공통 좌측 상단 태그 */
+    .top-tag {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      background: var(--blue);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-bottom-right-radius: 12px;
+      line-height: 1.35;
+      max-width: calc(100% - 16px);
+    }
+
+    /* MOQ */
+    .moq1-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%);
+      z-index: 1;
+    }
+    .moq1-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 8px;
+      z-index: 2;
+    }
+    .moq1-coming {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.8);
+      font-size: 16px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .moq1-title {
+      font-size: 30px; font-weight: 900;
+      color: #fff; letter-spacing: -0.02em;
+    }
+    .moq1-title em { color: var(--blue); font-style: normal; }
+    .moq1-dash { color: rgba(255,255,255,0.5); font-size: 16px; }
+
+    .moq2-content {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+    }
+    .moq2-glass {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 28px;
+      padding: 22px 28px;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      width: calc(100% - 32px);
+    }
+    .moq2-title { font-size: 28px; font-weight: 900; color: #fff; }
+    .moq2-line { width: 28px; height: 2px; background: var(--blue); border-radius: 2px; }
+    .moq2-pill {
+      font-size: 16px; font-weight: 700;
+      background: var(--blue); color: #fff;
+      padding: 4px 14px; border-radius: 20px;
+    }
+
+    .moq3-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(0,12,30,0.5) 0%, rgba(0,12,30,0.92) 100%);
+      z-index: 1;
+    }
+    .moq3-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 20px; gap: 8px;
+      z-index: 2;
+    }
+    .moq3-kicker {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.65);
+      font-size: 16px; font-weight: 600;
+      letter-spacing: 0.08em; padding: 3px 9px; border-radius: 20px;
+      width: fit-content;
+    }
+    .moq3-kicker::before {
+      content:''; width:5px; height:5px; border-radius:50%;
+      background: var(--orange); flex-shrink:0;
+    }
+    .moq3-title { font-size: 28px; font-weight: 900; color: #fff; line-height: 1.15; }
+    .moq3-title em { color: var(--blue); font-style: normal; }
+    .moq3-divider { width: 28px; height: 2px; background: var(--blue); border-radius: 2px; }
+    .moq3-sub { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    .moq4-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(0,60,140,0.93) 0%, rgba(0,130,255,0.5) 60%, rgba(0,0,0,0.15) 100%);
+      z-index: 1;
+    }
+    .moq4-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; padding: 22px 24px; gap: 12px;
+      z-index: 2;
+    }
+    .moq4-title { font-size: 28px; font-weight: 900; color: #fff; line-height: 1.15; }
+    .moq4-sub {
+      font-size: 16px; color: rgba(255,255,255,0.7);
+      padding-left: 9px; border-left: 2px solid rgba(255,255,255,0.35);
+      line-height: 1.7;
+    }
+    .moq4-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--orange); color: #fff;
+      font-size: 16px; font-weight: 700;
+      padding: 6px 12px; border-radius: 7px; width: fit-content;
+    }
+
+    .moq5-bg {
+      position: absolute; inset: 0;
+      z-index: 1;
+      background: rgba(247, 248, 250, 0.92);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .moq5-deco {
+      position: absolute;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,149,255,0.08), transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .moq5-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 10px; padding: 24px;
+    }
+    .moq5-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: #EBF5FF;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .moq5-pill {
+      background: #FFF0EB; color: var(--orange);
+      border: 1px solid #FFD4C0;
+      font-size: 16px; font-weight: 700;
+      padding: 3px 12px; border-radius: 20px;
+    }
+    .moq5-title { font-size: 26px; font-weight: 900; color: #111; line-height: 1.2; }
+    .moq5-blue { color: var(--blue); }
+    .moq5-sub { font-size: 16px; color: #aaa; }
+    .moq5-tag {
+      font-size: 16px; color: var(--blue); font-weight: 600;
+    }
+
+    /* ROCKET */
+    .rk1-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.65) 50%, transparent 100%);
+      z-index: 1;
+    }
+    .rk1-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; padding: 20px; gap: 10px; max-width: 75%;
+      z-index: 2;
+    }
+    .rk1-title { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .rk1-title em { color: var(--blue); font-style: normal; }
+    .rk1-desc {
+      font-size: 16px; color: rgba(255,255,255,0.85);
+      border-left: 2px solid var(--blue);
+      padding-left: 9px; line-height: 1.7; font-weight: 500;
+    }
+
+    .rk2-bg { position: absolute; inset: 0; background: #0a0f1e; z-index: 0; }
+    .rk2-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,15,40,0.92) 30%, transparent 100%);
+      z-index: 1;
+    }
+    .rk2-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 10px; padding: 20px;
+      z-index: 2;
+    }
+    .rk2-fullfill {
+      background: rgba(96,165,250,0.15);
+      border: 1px solid rgba(96,165,250,0.3);
+      color: #60a5fa; font-size: 16px; font-weight: 700;
+      padding: 3px 10px; border-radius: 5px; letter-spacing: 0.08em;
+    }
+    .rk2-main { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -0.02em; line-height: 1.1; }
+    .rk2-box {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 14px; border-radius: 14px; width: 100%;
+    }
+    .rk2-box p { font-size: 16px; color: #fff; font-weight: 700; }
+    .rk2-box span { font-size: 16px; color: rgba(255,255,255,0.5); }
+
+    .rk3-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(150deg, rgba(0,20,50,0.6) 0%, rgba(0,20,50,0.9) 100%);
+      z-index: 1;
+    }
+    .rk3-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 20px; gap: 10px;
+      z-index: 2;
+    }
+    .rk3-kicker {
+      font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .rk3-title { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .rk3-title em { color: var(--blue); font-style: normal; }
+    .rk3-flow {
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 7px 10px;
+    }
+    .rk3-step {
+      background: rgba(0,149,255,0.2); color: #60c0ff;
+      font-size: 16px; font-weight: 700;
+      padding: 2px 6px; border-radius: 4px;
+    }
+    .rk3-arrow { color: rgba(255,255,255,0.3); font-size: 16px; }
+
+    .rk4-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(110deg, rgba(0,60,140,0.9) 0%, rgba(0,149,255,0.6) 50%, rgba(0,0,0,0.1) 100%);
+      z-index: 1;
+    }
+    .rk4-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; padding: 22px; gap: 11px;
+      z-index: 2;
+    }
+    .rk4-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; font-size: 16px; font-weight: 600;
+      padding: 3px 9px; border-radius: 5px; width: fit-content;
+    }
+    .rk4-title { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .rk4-route {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 16px; color: rgba(255,255,255,0.7); font-weight: 600;
+    }
+    .rk4-node {
+      background: rgba(255,255,255,0.15); color: #fff;
+      font-size: 16px; font-weight: 700;
+      padding: 3px 7px; border-radius: 5px;
+    }
+    .rk4-arr { color: rgba(255,255,255,0.35); font-size: 16px; }
+    .rk4-highlight { color: var(--orange); font-weight: 900; font-size: 16px; }
+    .rk4-sub { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    .rk5-bg {
+      position: absolute; inset: 0;
+      background: #fff;
+      z-index: 0;
+    }
+    .rk5-accent {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: linear-gradient(90deg, var(--blue), #00c6ff);
+      z-index: 2;
+    }
+    .rk5-img {
+      position: absolute; inset: 0;
+      opacity: 0.07;
+      z-index: 1;
+    }
+    .rk5-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; padding: 22px; gap: 12px;
+      z-index: 3;
+    }
+    .rk5-title { font-size: 26px; font-weight: 900; color: #111; line-height: 1.2; }
+    .rk5-title em { color: var(--blue); font-style: normal; }
+    .rk5-steps {
+      display: flex; align-items: center; gap: 5px;
+    }
+    .rk5-s {
+      font-size: 16px; font-weight: 700; color: #555;
+      background: #f0f2f5; padding: 3px 7px; border-radius: 5px;
+    }
+    .rk5-ar { font-size: 16px; color: #ccc; }
+    .rk5-sub { font-size: 16px; color: #888; line-height: 1.6; }
+    .rk5-cta {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--blue); color: #fff;
+      font-size: 16px; font-weight: 700;
+      padding: 6px 12px; border-radius: 7px; width: fit-content;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-title">슈닝 배너 디자인 시안</div>
+
+<div class="download-bar">
+  <button type="button" id="btn-export-all">전체 시안 PNG 저장 (10장)</button>
+  <button type="button" id="btn-export-moq" class="secondary">MOQ만 (5장)</button>
+  <button type="button" id="btn-export-rocket" class="secondary">로켓 그로스만 (5장)</button>
+  <p class="download-note" id="png-note-display"></p>
+</div>
+
+<div id="image-help-display" class="help-display" aria-live="polite"></div>
+
+<div class="editor-panel">
+  <details>
+    <summary>이미지·안내 문구 편집 (고객용 · 이 브라우저에만 저장)</summary>
+    <div class="editor-inner">
+      <div>
+        <label for="edit-moq-url">MOQ 카드 배경 이미지 주소 (URL 또는 경로)</label>
+        <input type="text" id="edit-moq-url" autocomplete="off" placeholder="assets/moq-heatpress-bg.png">
+        <div class="file-upload-row">
+          <span class="file-label">또는 PC에서 이미지 선택</span>
+          <input type="file" id="upload-moq-file" accept="image/*">
+          <button type="button" id="btn-clear-moq-upload" class="mini">업로드 해제</button>
+          <span class="upload-status" id="status-moq-upload" hidden>업로드됨 · 새로고침 후에도 유지</span>
+        </div>
+        <p class="hint">예: assets/새이름.png 또는 https://…/image.png · 업로드한 이미지는 주소보다 우선합니다.</p>
+      </div>
+      <div>
+        <label for="edit-rocket-url">로켓 그로스 카드 배경 이미지 주소</label>
+        <input type="text" id="edit-rocket-url" autocomplete="off" placeholder="assets/rocket-cart-bg.png">
+        <div class="file-upload-row">
+          <span class="file-label">또는 PC에서 이미지 선택</span>
+          <input type="file" id="upload-rocket-file" accept="image/*">
+          <button type="button" id="btn-clear-rocket-upload" class="mini">업로드 해제</button>
+          <span class="upload-status" id="status-rocket-upload" hidden>업로드됨 · 새로고침 후에도 유지</span>
+        </div>
+      </div>
+      <div>
+        <label for="edit-image-help">위에 보이는 「배경 이미지 안내」문구</label>
+        <textarea id="edit-image-help" rows="4"></textarea>
+      </div>
+      <div>
+        <label for="edit-png-note">PNG 저장 안내(회색 작은 글씨) 문구</label>
+        <textarea id="edit-png-note" rows="3"></textarea>
+      </div>
+      <div class="btn-row">
+        <button type="button" id="btn-save-customer-settings">저장 및 적용</button>
+        <button type="button" id="btn-reset-customer-settings" class="ghost">초기화</button>
+      </div>
+      <p class="hint">호스팅 링크로 열어도 됩니다. 이미지는 주소 입력 또는 PC 업로드 중 하나(또는 둘 다)로 확인할 수 있으며, 업로드가 있으면 그쪽이 우선입니다. 설정은 이 브라우저 저장소에만 남습니다.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">1. 부담 없는 MOQ 카드</div>
+    <div class="section-sub">5종 시안</div>
+  </div>
+  <div class="grid-5">
+
+    <div class="variant">
+      <div class="v-label">V1 · 센터 글래스</div>
+      <div class="card" data-export="MOQ_V1">
+        <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+        <div class="moq1-overlay"></div>
+        <div class="moq1-center">
+          <div class="moq1-coming">COMING SOON</div>
+          <div class="moq1-title">부담 없는 <em>MOQ</em></div>
+          <div class="moq1-dash">— 서비스 준비 중입니다 —</div>
+        </div>
+        <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V2 · 글래스 카드</div>
+      <div class="card" data-export="MOQ_V2">
+        <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+        <div class="moq2-content">
+          <div class="moq2-glass">
+            <div class="moq2-title">부담 없는 MOQ</div>
+            <div class="moq2-line"></div>
+            <div class="moq2-pill">준비중</div>
+          </div>
+        </div>
+        <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V3 · 다크 드라마틱</div>
+      <div class="card" data-export="MOQ_V3">
+        <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+        <div class="moq3-overlay"></div>
+        <div class="moq3-content">
+          <div class="moq3-kicker">서비스 준비 중</div>
+          <div class="moq3-title">부담 없는 <em>MOQ</em></div>
+          <div class="moq3-divider"></div>
+          <div class="moq3-sub">소량 주문도 OK<br>최소 수량 부담 없이 시작하세요</div>
+        </div>
+        <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V4 · 블루 브랜드</div>
+      <div class="card" data-export="MOQ_V4">
+        <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+        <div class="moq4-overlay"></div>
+        <div class="moq4-content">
+          <div class="moq4-title">부담 없는<br>MOQ</div>
+          <div class="moq4-sub">소량 주문도 OK<br>최소 수량 없이 바로 시작</div>
+          <div class="moq4-btn">준비 중</div>
+        </div>
+        <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V5 · 미니멀 화이트</div>
+      <div class="card" data-export="MOQ_V5">
+        <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+        <div class="moq5-bg">
+          <div class="moq5-deco"></div>
+          <div class="moq5-content">
+            <div class="moq5-icon">📦</div>
+            <div class="moq5-pill">준비 중</div>
+            <div class="moq5-title">부담 없는<br><span class="moq5-blue">MOQ</span></div>
+            <div class="moq5-sub">나만의 브랜드 쉽게 만들기</div>
+            <div class="moq5-tag">소량 주문도 OK · 곧 오픈 예정</div>
+          </div>
+        </div>
+        <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">2. 로켓 그로스 논스톱 서비스 카드</div>
+    <div class="section-sub">5종 시안</div>
+  </div>
+  <div class="grid-5">
+
+    <div class="variant">
+      <div class="v-label">V1 · 좌측 정렬</div>
+      <div class="card" data-export="Rocket_V1">
+        <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+        <div class="rk1-overlay"></div>
+        <div class="rk1-content">
+          <div class="rk1-title">로켓 그로스<br><em>논스톱</em> 서비스</div>
+          <div class="rk1-desc">중국 창고에서 쿠팡 창고까지<br><strong>다이렉트로 한 번에 입고!</strong></div>
+        </div>
+        <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V2 · 다크 다이나믹</div>
+      <div class="card" data-export="Rocket_V2">
+        <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+        <div class="rk2-bg"></div>
+        <div class="rk2-overlay"></div>
+        <div class="rk2-center">
+          <div class="rk2-fullfill">FULL-FILLMENT</div>
+          <div class="rk2-main">NON-STOP<br>SERVICE</div>
+          <div class="rk2-box">
+            <p>로켓 그로스 논스톱 입고</p>
+            <span>중국 → 쿠팡 창고 다이렉트 솔루션</span>
+          </div>
+        </div>
+        <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V3 · 물류 플로우</div>
+      <div class="card" data-export="Rocket_V3">
+        <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+        <div class="rk3-overlay"></div>
+        <div class="rk3-content">
+          <div class="rk3-title">로켓 그로스<br><em>논스톱</em> 서비스</div>
+          <div class="rk3-flow">
+            <div class="rk3-step">중국창고</div>
+            <div class="rk3-arrow">→</div>
+            <div class="rk3-step">슈닝</div>
+            <div class="rk3-arrow">→</div>
+            <div class="rk3-step">쿠팡창고</div>
+          </div>
+        </div>
+        <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V4 · 블루 루트</div>
+      <div class="card" data-export="Rocket_V4">
+        <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+        <div class="rk4-overlay"></div>
+        <div class="rk4-content">
+          <div class="rk4-title">로켓 그로스<br>논스톱 서비스</div>
+          <div class="rk4-route">
+            <div class="rk4-node">중국창고</div>
+            <div class="rk4-arr">→</div>
+            <div class="rk4-node">슈닝</div>
+            <div class="rk4-arr">→</div>
+            <div class="rk4-node">쿠팡</div>
+            <div class="rk4-highlight">DIRECT</div>
+          </div>
+          <div class="rk4-sub">중국에서 쿠팡 창고까지<br>다이렉트로 한 번에!</div>
+        </div>
+        <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="v-label">V5 · 클린 화이트</div>
+      <div class="card" data-export="Rocket_V5">
+        <div class="rk5-bg">
+          <div class="rk5-accent"></div>
+          <img class="rk5-img" src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+        </div>
+        <div class="rk5-content">
+          <div class="rk5-title">로켓 그로스<br><em>논스톱</em> 서비스</div>
+          <div class="rk5-steps">
+            <div class="rk5-s">중국창고</div>
+            <div class="rk5-ar">→</div>
+            <div class="rk5-s">슈닝</div>
+            <div class="rk5-ar">→</div>
+            <div class="rk5-s">쿠팡창고</div>
+          </div>
+          <div class="rk5-sub">다이렉트로 한 번에 입고<br>복잡한 물류, 슈닝이 해결합니다</div>
+          <div class="rk5-cta">자세히 보기 →</div>
+        </div>
+        <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var LS_MOQ = 'suning_banner_moq_url';
+  var LS_ROCKET = 'suning_banner_rocket_url';
+  var LS_IMG_HELP = 'suning_banner_image_help';
+  var LS_PNG_NOTE = 'suning_banner_png_note';
+
+  var DEFAULT_MOQ = 'assets/moq-heatpress-bg.png';
+  var DEFAULT_ROCKET = 'assets/rocket-cart-bg.png';
+  var DEFAULT_IMG_HELP =
+    '【 배경 이미지 바꾸기 】\n' +
+    '• assets 폴더에서 moq-heatpress-bg.png · rocket-cart-bg.png 파일을 같은 이름으로 덮어쓰기 하거나,\n' +
+    '• 아래 「이미지·안내 문구 편집」을 펼쳐 주소를 넣고 [저장 및 적용]을 누르거나, PC에서 이미지를 직접 선택하세요.\n' +
+    '※ 주소와 업로드를 함께 쓰면 업로드 이미지가 우선합니다. 주소만 쓰려면 [업로드 해제]를 누르세요.\n' +
+    '※ 설정은 이 브라우저에만 저장됩니다. 다른 사람 PC에는 기본 이미지가 보일 수 있습니다.';
+  var DEFAULT_PNG_NOTE =
+    'PNG 저장은 http://localhost 로 열었을 때만 동작합니다. 이 폴더에서 터미널을 연 뒤 py -m http.server 8080 실행 → 브라우저에서 http://localhost:8080/banner.html 로 접속하세요.';
+
+  var IDB_NAME = 'suning_banner_images_v1';
+  var IDB_STORE = 'blobs';
+  var moqBlobUrl = null;
+  var rocketBlobUrl = null;
+
+  function revokeBlobUrls() {
+    if (moqBlobUrl) {
+      URL.revokeObjectURL(moqBlobUrl);
+      moqBlobUrl = null;
+    }
+    if (rocketBlobUrl) {
+      URL.revokeObjectURL(rocketBlobUrl);
+      rocketBlobUrl = null;
+    }
+  }
+
+  function openBlobDb() {
+    return new Promise(function (resolve, reject) {
+      var req = indexedDB.open(IDB_NAME, 1);
+      req.onerror = function () {
+        reject(req.error);
+      };
+      req.onupgradeneeded = function (e) {
+        var db = e.target.result;
+        if (!db.objectStoreNames.contains(IDB_STORE)) {
+          db.createObjectStore(IDB_STORE);
+        }
+      };
+      req.onsuccess = function () {
+        resolve(req.result);
+      };
+    });
+  }
+
+  function idbPut(key, blob) {
+    return openBlobDb().then(function (db) {
+      return new Promise(function (resolve, reject) {
+        var tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.oncomplete = function () {
+          resolve();
+        };
+        tx.onerror = function () {
+          reject(tx.error);
+        };
+        tx.objectStore(IDB_STORE).put(blob, key);
+      });
+    });
+  }
+
+  function idbGet(key) {
+    return openBlobDb().then(function (db) {
+      return new Promise(function (resolve, reject) {
+        var tx = db.transaction(IDB_STORE, 'readonly');
+        var r = tx.objectStore(IDB_STORE).get(key);
+        r.onsuccess = function () {
+          resolve(r.result);
+        };
+        r.onerror = function () {
+          reject(r.error);
+        };
+      });
+    });
+  }
+
+  function idbDelete(key) {
+    return openBlobDb().then(function (db) {
+      return new Promise(function (resolve, reject) {
+        var tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.oncomplete = function () {
+          resolve();
+        };
+        tx.onerror = function () {
+          reject(tx.error);
+        };
+        tx.objectStore(IDB_STORE).delete(key);
+      });
+    });
+  }
+
+  function idbClearBlobs() {
+    return openBlobDb().then(function (db) {
+      return new Promise(function (resolve, reject) {
+        var tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.oncomplete = function () {
+          resolve();
+        };
+        tx.onerror = function () {
+          reject(tx.error);
+        };
+        tx.objectStore(IDB_STORE).clear();
+      });
+    });
+  }
+
+  function setUploadStatusBadges(moqBlob, rocketBlob) {
+    var sMoq = document.getElementById('status-moq-upload');
+    var sRocket = document.getElementById('status-rocket-upload');
+    if (sMoq) sMoq.hidden = !moqBlob;
+    if (sRocket) sRocket.hidden = !rocketBlob;
+  }
+
+  function applyBgFromStorage() {
+    return Promise.all([idbGet('moq'), idbGet('rocket')])
+      .then(function (results) {
+        var moqBlob = results[0];
+        var rocketBlob = results[1];
+        revokeBlobUrls();
+        var moq = localStorage.getItem(LS_MOQ) || DEFAULT_MOQ;
+        var rocket = localStorage.getItem(LS_ROCKET) || DEFAULT_ROCKET;
+        if (moqBlob) {
+          moqBlobUrl = URL.createObjectURL(moqBlob);
+          document.querySelectorAll('img[data-bg="moq"]').forEach(function (img) {
+            img.src = moqBlobUrl;
+          });
+        } else {
+          document.querySelectorAll('img[data-bg="moq"]').forEach(function (img) {
+            img.src = moq;
+          });
+        }
+        if (rocketBlob) {
+          rocketBlobUrl = URL.createObjectURL(rocketBlob);
+          document.querySelectorAll('img[data-bg="rocket"]').forEach(function (img) {
+            img.src = rocketBlobUrl;
+          });
+        } else {
+          document.querySelectorAll('img[data-bg="rocket"]').forEach(function (img) {
+            img.src = rocket;
+          });
+        }
+        setUploadStatusBadges(moqBlob, rocketBlob);
+      })
+      .catch(function () {
+        revokeBlobUrls();
+        var moq = localStorage.getItem(LS_MOQ) || DEFAULT_MOQ;
+        var rocket = localStorage.getItem(LS_ROCKET) || DEFAULT_ROCKET;
+        document.querySelectorAll('img[data-bg="moq"]').forEach(function (img) {
+          img.src = moq;
+        });
+        document.querySelectorAll('img[data-bg="rocket"]').forEach(function (img) {
+          img.src = rocket;
+        });
+        setUploadStatusBadges(null, null);
+      });
+  }
+
+  function applyHelpDisplays() {
+    var imgHelp = localStorage.getItem(LS_IMG_HELP);
+    if (imgHelp === null || imgHelp === '') imgHelp = DEFAULT_IMG_HELP;
+    var hel = document.getElementById('image-help-display');
+    if (hel) hel.textContent = imgHelp;
+
+    var pngNote = localStorage.getItem(LS_PNG_NOTE);
+    if (pngNote === null || pngNote === '') pngNote = DEFAULT_PNG_NOTE;
+    var p = document.getElementById('png-note-display');
+    if (p) p.textContent = pngNote;
+  }
+
+  function initEditorForm() {
+    var inpMoq = document.getElementById('edit-moq-url');
+    var inpRocket = document.getElementById('edit-rocket-url');
+    var taImgHelp = document.getElementById('edit-image-help');
+    var taPng = document.getElementById('edit-png-note');
+    var btnSave = document.getElementById('btn-save-customer-settings');
+    var btnReset = document.getElementById('btn-reset-customer-settings');
+    if (!inpMoq || !btnSave) return;
+
+    inpMoq.value = localStorage.getItem(LS_MOQ) || DEFAULT_MOQ;
+    inpRocket.value = localStorage.getItem(LS_ROCKET) || DEFAULT_ROCKET;
+    taImgHelp.value =
+      localStorage.getItem(LS_IMG_HELP) !== null ? localStorage.getItem(LS_IMG_HELP) : DEFAULT_IMG_HELP;
+    taPng.value =
+      localStorage.getItem(LS_PNG_NOTE) !== null ? localStorage.getItem(LS_PNG_NOTE) : DEFAULT_PNG_NOTE;
+
+    btnSave.addEventListener('click', function () {
+      var m = (inpMoq.value || '').trim() || DEFAULT_MOQ;
+      var r = (inpRocket.value || '').trim() || DEFAULT_ROCKET;
+      localStorage.setItem(LS_MOQ, m);
+      localStorage.setItem(LS_ROCKET, r);
+      localStorage.setItem(LS_IMG_HELP, taImgHelp.value);
+      localStorage.setItem(LS_PNG_NOTE, taPng.value);
+      applyBgFromStorage().then(function () {
+        applyHelpDisplays();
+        alert('저장했습니다. 배경은 업로드가 있으면 업로드가 우선합니다.');
+      });
+    });
+
+    btnReset.addEventListener('click', function () {
+      if (!confirm('저장된 설정을 지우고 기본값으로 돌릴까요?')) return;
+      localStorage.removeItem(LS_MOQ);
+      localStorage.removeItem(LS_ROCKET);
+      localStorage.removeItem(LS_IMG_HELP);
+      localStorage.removeItem(LS_PNG_NOTE);
+      inpMoq.value = DEFAULT_MOQ;
+      inpRocket.value = DEFAULT_ROCKET;
+      taImgHelp.value = DEFAULT_IMG_HELP;
+      taPng.value = DEFAULT_PNG_NOTE;
+      var upMoq = document.getElementById('upload-moq-file');
+      var upRocket = document.getElementById('upload-rocket-file');
+      if (upMoq) upMoq.value = '';
+      if (upRocket) upRocket.value = '';
+      idbClearBlobs()
+        .then(function () {
+          return applyBgFromStorage();
+        })
+        .then(function () {
+          applyHelpDisplays();
+        });
+    });
+
+    var upMoq = document.getElementById('upload-moq-file');
+    var upRocket = document.getElementById('upload-rocket-file');
+    var btnClearMoq = document.getElementById('btn-clear-moq-upload');
+    var btnClearRocket = document.getElementById('btn-clear-rocket-upload');
+
+    if (upMoq) {
+      upMoq.addEventListener('change', function () {
+        var f = upMoq.files && upMoq.files[0];
+        if (!f || !f.type || f.type.indexOf('image/') !== 0) {
+          if (f) alert('이미지 파일만 선택할 수 있습니다.');
+          upMoq.value = '';
+          return;
+        }
+        idbPut('moq', f)
+          .then(function () {
+            return applyBgFromStorage();
+          })
+          .catch(function () {
+            alert('이미지 저장에 실패했습니다. 브라우저 저장소를 확인해 주세요.');
+          });
+      });
+    }
+    if (upRocket) {
+      upRocket.addEventListener('change', function () {
+        var f = upRocket.files && upRocket.files[0];
+        if (!f || !f.type || f.type.indexOf('image/') !== 0) {
+          if (f) alert('이미지 파일만 선택할 수 있습니다.');
+          upRocket.value = '';
+          return;
+        }
+        idbPut('rocket', f)
+          .then(function () {
+            return applyBgFromStorage();
+          })
+          .catch(function () {
+            alert('이미지 저장에 실패했습니다. 브라우저 저장소를 확인해 주세요.');
+          });
+      });
+    }
+    if (btnClearMoq) {
+      btnClearMoq.addEventListener('click', function () {
+        if (upMoq) upMoq.value = '';
+        idbDelete('moq').then(function () {
+          return applyBgFromStorage();
+        });
+      });
+    }
+    if (btnClearRocket) {
+      btnClearRocket.addEventListener('click', function () {
+        if (upRocket) upRocket.value = '';
+        idbDelete('rocket').then(function () {
+          return applyBgFromStorage();
+        });
+      });
+    }
+  }
+
+  function initCustomerPanel() {
+    applyBgFromStorage().then(function () {
+      applyHelpDisplays();
+      initEditorForm();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCustomerPanel);
+  } else {
+    initCustomerPanel();
+  }
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+(function () {
+  function getExportName(card) {
+    return card.getAttribute('data-export') || '슈닝배너';
+  }
+
+  /** file:// 에서는 Canvas가 오염되어 toDataURL 불가 → http 로만 저장 */
+  function assertHttpPage() {
+    if (window.location.protocol === 'file:') {
+      alert(
+        'PNG 저장은 보안 정책 때문에 file:// 로 연 페이지에서는 할 수 없습니다.\n\n' +
+        '이 폴더에서 PowerShell 또는 명령 프롬프트를 연 뒤:\n' +
+        '  py -m http.server 8080\n' +
+        '그 다음 브라우저 주소창에 입력:\n' +
+        '  http://localhost:8080/banner.html\n\n' +
+        '(Python이 없으면: npx --yes serve . 또는 VS Code Live Server)'
+      );
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * <img>를 fetch→blob URL로 잠시 바꿔 캔버스 오염(Tainted canvas) 방지
+   */
+  async function withBlobImageSources(card, fn) {
+    var imgs = Array.prototype.slice.call(card.querySelectorAll('img'));
+    var backups = [];
+    try {
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        var srcAttr = img.getAttribute('src');
+        if (!srcAttr || srcAttr.indexOf('data:') === 0) continue;
+        var abs = new URL(srcAttr, window.location.href).href;
+        var res = await fetch(abs, { credentials: 'same-origin' });
+        if (!res.ok) throw new Error('이미지를 불러오지 못했습니다: ' + srcAttr);
+        var blob = await res.blob();
+        var blobUrl = URL.createObjectURL(blob);
+        backups.push({ img: img, prev: img.src, blobUrl: blobUrl });
+        img.src = blobUrl;
+        if (img.decode) {
+          await img.decode();
+        } else {
+          await new Promise(function (resolve, reject) {
+            img.onload = resolve;
+            img.onerror = reject;
+          });
+        }
+      }
+      return await fn();
+    } finally {
+      backups.forEach(function (b) {
+        URL.revokeObjectURL(b.blobUrl);
+        b.img.src = b.prev;
+      });
+    }
+  }
+
+  async function exportOneCard(card) {
+    if (typeof html2canvas !== 'function') {
+      throw new Error('html2canvas 를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.');
+    }
+    var name = getExportName(card);
+    await withBlobImageSources(card, async function () {
+      var canvas = await html2canvas(card, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: null,
+        logging: false,
+        onclone: function (clonedDoc) {
+          clonedDoc.querySelectorAll('.card').forEach(function (el) {
+            el.style.transform = 'none';
+          });
+          clonedDoc.querySelectorAll('img').forEach(function (img) {
+            img.style.transform = 'none';
+          });
+        }
+      });
+      var dataUrl = canvas.toDataURL('image/png');
+      var a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = '슈닝배너_' + name + '.png';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  }
+
+  async function exportCards(cards, setBusy) {
+    if (!assertHttpPage()) return;
+    setBusy(true);
+    try {
+      for (var i = 0; i < cards.length; i++) {
+        await exportOneCard(cards[i]);
+        if (i < cards.length - 1) {
+          await new Promise(function (r) { setTimeout(r, 450); });
+        }
+      }
+    } catch (e) {
+      console.error(e);
+      var msg = e && e.message ? e.message : String(e);
+      if (msg.indexOf('Tainted') !== -1 || msg.indexOf('toDataURL') !== -1) {
+        msg +=
+          '\n\n→ 페이지를 http://localhost 로 열었는지 확인하세요. ' +
+          'file:// 로 열면 저장할 수 없습니다.';
+      }
+      alert('PNG 저장에 실패했습니다.\n\n' + msg);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function setButtonsDisabled(disabled) {
+    ['btn-export-all', 'btn-export-moq', 'btn-export-rocket'].forEach(function (id) {
+      var b = document.getElementById(id);
+      if (b) b.disabled = disabled;
+    });
+  }
+
+  function allCards() {
+    return Array.prototype.slice.call(document.querySelectorAll('.card[data-export]'));
+  }
+
+  document.getElementById('btn-export-all').addEventListener('click', function () {
+    exportCards(allCards(), setButtonsDisabled);
+  });
+
+  document.getElementById('btn-export-moq').addEventListener('click', function () {
+    exportCards(
+      allCards().filter(function (c) {
+        return (c.getAttribute('data-export') || '').indexOf('MOQ') === 0;
+      }),
+      setButtonsDisabled
+    );
+  });
+
+  document.getElementById('btn-export-rocket').addEventListener('click', function () {
+    exportCards(
+      allCards().filter(function (c) {
+        return (c.getAttribute('data-export') || '').indexOf('Rocket') === 0;
+      }),
+      setButtonsDisabled
+    );
+  });
+})();
+</script>
+
+</body>
+</html>
