@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/banner.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
