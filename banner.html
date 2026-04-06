@@ -72,34 +72,6 @@
 
     .download-bar button.secondary:hover { background: #f0f8ff; }
 
-    .download-note {
-      width: 100%;
-      font-size: 11px;
-      color: #888;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .download-note code {
-      font-size: 10px;
-      background: #f0f2f5;
-      padding: 1px 5px;
-      border-radius: 4px;
-    }
-
-    .help-display {
-      margin-bottom: 24px;
-      padding: 14px 16px;
-      background: #f8f9fc;
-      border: 1px dashed #c5cdd8;
-      border-radius: 10px;
-      font-size: 12px;
-      color: #555;
-      line-height: 1.65;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
     .editor-panel {
       margin-bottom: 28px;
       padding: 0;
@@ -599,14 +571,11 @@
   <button type="button" id="btn-export-all">전체 시안 PNG 저장 (10장)</button>
   <button type="button" id="btn-export-moq" class="secondary">MOQ만 (5장)</button>
   <button type="button" id="btn-export-rocket" class="secondary">로켓 그로스만 (5장)</button>
-  <p class="download-note" id="png-note-display"></p>
 </div>
-
-<div id="image-help-display" class="help-display" aria-live="polite"></div>
 
 <div class="editor-panel">
   <details>
-    <summary>이미지·안내 문구 편집 (고객용 · 이 브라우저에만 저장)</summary>
+    <summary>배경 이미지 설정 (고객용 · 이 브라우저에만 저장)</summary>
     <div class="editor-inner">
       <div>
         <label for="edit-moq-url">MOQ 카드 배경 이미지 주소 (URL 또는 경로)</label>
@@ -628,14 +597,6 @@
           <button type="button" id="btn-clear-rocket-upload" class="mini">업로드 해제</button>
           <span class="upload-status" id="status-rocket-upload" hidden>업로드됨 · 새로고침 후에도 유지</span>
         </div>
-      </div>
-      <div>
-        <label for="edit-image-help">위에 보이는 「배경 이미지 안내」문구</label>
-        <textarea id="edit-image-help" rows="4"></textarea>
-      </div>
-      <div>
-        <label for="edit-png-note">PNG 저장 안내(회색 작은 글씨) 문구</label>
-        <textarea id="edit-png-note" rows="3"></textarea>
       </div>
       <div class="btn-row">
         <button type="button" id="btn-save-customer-settings">저장 및 적용</button>
@@ -840,19 +801,9 @@
 (function () {
   var LS_MOQ = 'suning_banner_moq_url';
   var LS_ROCKET = 'suning_banner_rocket_url';
-  var LS_IMG_HELP = 'suning_banner_image_help';
-  var LS_PNG_NOTE = 'suning_banner_png_note';
 
   var DEFAULT_MOQ = 'assets/moq-heatpress-bg.png';
   var DEFAULT_ROCKET = 'assets/rocket-cart-bg.png';
-  var DEFAULT_IMG_HELP =
-    '【 배경 이미지 바꾸기 】\n' +
-    '• assets 폴더에서 moq-heatpress-bg.png · rocket-cart-bg.png 파일을 같은 이름으로 덮어쓰기 하거나,\n' +
-    '• 아래 「이미지·안내 문구 편집」을 펼쳐 주소를 넣고 [저장 및 적용]을 누르거나, PC에서 이미지를 직접 선택하세요.\n' +
-    '※ 주소와 업로드를 함께 쓰면 업로드 이미지가 우선합니다. 주소만 쓰려면 [업로드 해제]를 누르세요.\n' +
-    '※ 설정은 이 브라우저에만 저장됩니다. 다른 사람 PC에는 기본 이미지가 보일 수 있습니다.';
-  var DEFAULT_PNG_NOTE =
-    'PNG 저장은 http://localhost 로 열었을 때만 동작합니다. 이 폴더에서 터미널을 연 뒤 py -m http.server 8080 실행 → 브라우저에서 http://localhost:8080/banner.html 로 접속하세요.';
 
   var IDB_NAME = 'suning_banner_images_v1';
   var IDB_STORE = 'blobs';
@@ -999,43 +950,22 @@
       });
   }
 
-  function applyHelpDisplays() {
-    var imgHelp = localStorage.getItem(LS_IMG_HELP);
-    if (imgHelp === null || imgHelp === '') imgHelp = DEFAULT_IMG_HELP;
-    var hel = document.getElementById('image-help-display');
-    if (hel) hel.textContent = imgHelp;
-
-    var pngNote = localStorage.getItem(LS_PNG_NOTE);
-    if (pngNote === null || pngNote === '') pngNote = DEFAULT_PNG_NOTE;
-    var p = document.getElementById('png-note-display');
-    if (p) p.textContent = pngNote;
-  }
-
   function initEditorForm() {
     var inpMoq = document.getElementById('edit-moq-url');
     var inpRocket = document.getElementById('edit-rocket-url');
-    var taImgHelp = document.getElementById('edit-image-help');
-    var taPng = document.getElementById('edit-png-note');
     var btnSave = document.getElementById('btn-save-customer-settings');
     var btnReset = document.getElementById('btn-reset-customer-settings');
     if (!inpMoq || !btnSave) return;
 
     inpMoq.value = localStorage.getItem(LS_MOQ) || DEFAULT_MOQ;
     inpRocket.value = localStorage.getItem(LS_ROCKET) || DEFAULT_ROCKET;
-    taImgHelp.value =
-      localStorage.getItem(LS_IMG_HELP) !== null ? localStorage.getItem(LS_IMG_HELP) : DEFAULT_IMG_HELP;
-    taPng.value =
-      localStorage.getItem(LS_PNG_NOTE) !== null ? localStorage.getItem(LS_PNG_NOTE) : DEFAULT_PNG_NOTE;
 
     btnSave.addEventListener('click', function () {
       var m = (inpMoq.value || '').trim() || DEFAULT_MOQ;
       var r = (inpRocket.value || '').trim() || DEFAULT_ROCKET;
       localStorage.setItem(LS_MOQ, m);
       localStorage.setItem(LS_ROCKET, r);
-      localStorage.setItem(LS_IMG_HELP, taImgHelp.value);
-      localStorage.setItem(LS_PNG_NOTE, taPng.value);
       applyBgFromStorage().then(function () {
-        applyHelpDisplays();
         alert('저장했습니다. 배경은 업로드가 있으면 업로드가 우선합니다.');
       });
     });
@@ -1044,23 +974,15 @@
       if (!confirm('저장된 설정을 지우고 기본값으로 돌릴까요?')) return;
       localStorage.removeItem(LS_MOQ);
       localStorage.removeItem(LS_ROCKET);
-      localStorage.removeItem(LS_IMG_HELP);
-      localStorage.removeItem(LS_PNG_NOTE);
       inpMoq.value = DEFAULT_MOQ;
       inpRocket.value = DEFAULT_ROCKET;
-      taImgHelp.value = DEFAULT_IMG_HELP;
-      taPng.value = DEFAULT_PNG_NOTE;
       var upMoq = document.getElementById('upload-moq-file');
       var upRocket = document.getElementById('upload-rocket-file');
       if (upMoq) upMoq.value = '';
       if (upRocket) upRocket.value = '';
-      idbClearBlobs()
-        .then(function () {
-          return applyBgFromStorage();
-        })
-        .then(function () {
-          applyHelpDisplays();
-        });
+      idbClearBlobs().then(function () {
+        return applyBgFromStorage();
+      });
     });
 
     var upMoq = document.getElementById('upload-moq-file');
@@ -1122,7 +1044,6 @@
 
   function initCustomerPanel() {
     applyBgFromStorage().then(function () {
-      applyHelpDisplays();
       initEditorForm();
     });
   }
