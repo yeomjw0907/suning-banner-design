@@ -584,16 +584,17 @@
       color: #2a3142;
       margin-bottom: 14px;
     }
+    /* 위 시안(.grid-5)과 동일: 한 줄 3개 → 썸네일 너비·PNG 해상도 동일하게 */
     .v4-compare-grid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-    @media (max-width: 1400px) {
-      .v4-compare-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 900px) {
+    @media (max-width: 640px) {
       .v4-compare-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .v4-compare-grid { grid-template-columns: 1fr; }
     }
     .v4-compare-col { display: flex; flex-direction: column; gap: 8px; }
     .v4-compare-step { font-size: 13px; font-weight: 700; color: #334; line-height: 1.35; }
@@ -629,46 +630,7 @@
       font-weight: 600;
     }
 
-    /* V4 참고 썸네일 안 문구 (본문 V4와 동일 구성 · 크기만 축소) */
-    .section-v4-compare .top-tag {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 5px 9px;
-      border-bottom-right-radius: 8px;
-      max-width: calc(100% - 6px);
-      line-height: 1.25;
-    }
-    .section-v4-compare .moq4-content {
-      padding: 10px 12px;
-      gap: 6px;
-    }
-    .section-v4-compare .moq4-title { font-size: 17px; }
-    .section-v4-compare .moq4-sub {
-      font-size: 11px;
-      padding-left: 6px;
-      line-height: 1.45;
-    }
-    .section-v4-compare .moq4-btn {
-      font-size: 11px;
-      padding: 4px 8px;
-    }
-    .section-v4-compare .rk4-content {
-      padding: 8px 10px;
-      gap: 5px;
-    }
-    .section-v4-compare .rk4-title { font-size: 14px; }
-    .section-v4-compare .rk4-route {
-      flex-wrap: wrap;
-      gap: 3px 4px;
-      font-size: 10px;
-    }
-    .section-v4-compare .rk4-node {
-      font-size: 9px;
-      padding: 2px 4px;
-    }
-    .section-v4-compare .rk4-arr { font-size: 10px; }
-    .section-v4-compare .rk4-highlight { font-size: 9px; }
-    .section-v4-compare .rk4-sub { font-size: 10px; line-height: 1.4; }
+    /* 3열 배치 후 너비가 본문 카드와 같으므로 V4 문구는 본문과 동일 클래스 크기 사용 */
     .v4-compare-list {
       margin: 8px 0 0;
       padding-left: 18px;
@@ -967,6 +929,7 @@
   </div>
   <p class="v4-compare-intro">
     아래 ①~⑥은 같은 레이아웃에서 <strong>파란 그라데이션만</strong> 단계별로 연하게 조정한 예시입니다.
+    배치는 위 시안과 같이 <strong>한 줄에 3개</strong>라서 카드 크기·PNG 저장 해상도가 본문 시안과 맞습니다.
     위쪽 본문 시안의 V4 카드는 <strong>③ 보통</strong>과 같습니다. PNG 일괄 저장에는 포함되지 않습니다.
     <strong>썸네일을 클릭</strong>하면 해당 단계만 PNG로 저장됩니다 (<code>http://localhost</code> 등으로 열었을 때).
   </p>
