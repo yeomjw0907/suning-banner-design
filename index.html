@@ -72,6 +72,14 @@
 
     .download-bar button.secondary:hover { background: #f0f8ff; }
 
+    .download-hint {
+      font-size: 12px;
+      color: #777;
+      margin: -24px 0 28px;
+      line-height: 1.5;
+      max-width: 920px;
+    }
+
     .editor-panel {
       margin-bottom: 28px;
       padding: 0;
@@ -353,7 +361,7 @@
 
     .moq4-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(120deg, rgba(0,60,140,0.93) 0%, rgba(0,130,255,0.5) 60%, rgba(0,0,0,0.15) 100%);
+      background: linear-gradient(120deg, rgba(0,60,140,0.78) 0%, rgba(0,130,255,0.38) 60%, rgba(0,0,0,0.12) 100%);
       z-index: 1;
     }
     .moq4-content {
@@ -373,6 +381,23 @@
       background: var(--orange); color: #fff;
       font-size: 16px; font-weight: 700;
       padding: 6px 12px; border-radius: 7px; width: fit-content;
+    }
+
+    /* MOQ V4 블루 필터 단계 (참고 비교용 · ③이 본문 시안과 동일) */
+    .moq4-overlay.moq4-overlay--L1 {
+      background: linear-gradient(120deg, rgba(0,60,140,0.93) 0%, rgba(0,130,255,0.52) 60%, rgba(0,0,0,0.15) 100%);
+    }
+    .moq4-overlay.moq4-overlay--L2 {
+      background: linear-gradient(120deg, rgba(0,60,140,0.86) 0%, rgba(0,130,255,0.45) 60%, rgba(0,0,0,0.13) 100%);
+    }
+    .moq4-overlay.moq4-overlay--L4 {
+      background: linear-gradient(120deg, rgba(0,60,140,0.65) 0%, rgba(0,130,255,0.28) 60%, rgba(0,0,0,0.08) 100%);
+    }
+    .moq4-overlay.moq4-overlay--L5 {
+      background: linear-gradient(120deg, rgba(0,60,140,0.52) 0%, rgba(0,130,255,0.20) 60%, rgba(0,0,0,0.05) 100%);
+    }
+    .moq4-overlay.moq4-overlay--L6 {
+      background: linear-gradient(120deg, rgba(0,60,140,0.40) 0%, rgba(0,130,255,0.12) 60%, rgba(0,0,0,0.03) 100%);
     }
 
     .moq5-bg {
@@ -494,7 +519,7 @@
 
     .rk4-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(110deg, rgba(0,60,140,0.9) 0%, rgba(0,149,255,0.6) 50%, rgba(0,0,0,0.1) 100%);
+      background: linear-gradient(110deg, rgba(0,60,140,0.78) 0%, rgba(0,149,255,0.38) 50%, rgba(0,0,0,0.12) 100%);
       z-index: 1;
     }
     .rk4-content {
@@ -522,6 +547,143 @@
     .rk4-arr { color: rgba(255,255,255,0.35); font-size: 16px; }
     .rk4-highlight { color: var(--orange); font-weight: 900; font-size: 16px; }
     .rk4-sub { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    /* 로켓 V4 블루 필터 단계 (③이 본문 시안과 동일) */
+    .rk4-overlay.rk4-overlay--L1 {
+      background: linear-gradient(110deg, rgba(0,60,140,0.93) 0%, rgba(0,149,255,0.55) 50%, rgba(0,0,0,0.15) 100%);
+    }
+    .rk4-overlay.rk4-overlay--L2 {
+      background: linear-gradient(110deg, rgba(0,60,140,0.86) 0%, rgba(0,149,255,0.46) 50%, rgba(0,0,0,0.13) 100%);
+    }
+    .rk4-overlay.rk4-overlay--L4 {
+      background: linear-gradient(110deg, rgba(0,60,140,0.65) 0%, rgba(0,149,255,0.28) 50%, rgba(0,0,0,0.08) 100%);
+    }
+    .rk4-overlay.rk4-overlay--L5 {
+      background: linear-gradient(110deg, rgba(0,60,140,0.52) 0%, rgba(0,149,255,0.20) 50%, rgba(0,0,0,0.05) 100%);
+    }
+    .rk4-overlay.rk4-overlay--L6 {
+      background: linear-gradient(110deg, rgba(0,60,140,0.40) 0%, rgba(0,149,255,0.12) 50%, rgba(0,0,0,0.03) 100%);
+    }
+
+    .section-v4-compare {
+      margin-bottom: 56px;
+      padding-top: 28px;
+      border-top: 1px solid #e8eaef;
+    }
+    .v4-compare-intro {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 22px;
+      max-width: 920px;
+    }
+    .v4-compare-block { margin-bottom: 32px; }
+    .v4-compare-block-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2a3142;
+      margin-bottom: 14px;
+    }
+    .v4-compare-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 1400px) {
+      .v4-compare-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .v4-compare-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .v4-compare-col { display: flex; flex-direction: column; gap: 8px; }
+    .v4-compare-step { font-size: 13px; font-weight: 700; color: #334; line-height: 1.35; }
+    .v4-compare-step em { font-style: normal; color: var(--blue); font-weight: 800; }
+    .v4-compare-step .v4-step-sub { display: block; font-size: 11px; font-weight: 500; color: #888; margin-top: 3px; }
+    .v4-preview-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.1);
+      cursor: pointer;
+      outline: none;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .v4-preview-card:hover {
+      box-shadow: 0 6px 22px rgba(0,100,200,0.22);
+      transform: translateY(-2px);
+    }
+    .v4-preview-card:focus-visible {
+      box-shadow: 0 0 0 3px rgba(0,149,255,0.45);
+    }
+    .v4-preview-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .v4-preview-hint {
+      font-size: 11px;
+      color: #888;
+      font-weight: 600;
+    }
+
+    /* V4 참고 썸네일 안 문구 (본문 V4와 동일 구성 · 크기만 축소) */
+    .section-v4-compare .top-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-bottom-right-radius: 8px;
+      max-width: calc(100% - 6px);
+      line-height: 1.25;
+    }
+    .section-v4-compare .moq4-content {
+      padding: 10px 12px;
+      gap: 6px;
+    }
+    .section-v4-compare .moq4-title { font-size: 17px; }
+    .section-v4-compare .moq4-sub {
+      font-size: 11px;
+      padding-left: 6px;
+      line-height: 1.45;
+    }
+    .section-v4-compare .moq4-btn {
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+    .section-v4-compare .rk4-content {
+      padding: 8px 10px;
+      gap: 5px;
+    }
+    .section-v4-compare .rk4-title { font-size: 14px; }
+    .section-v4-compare .rk4-route {
+      flex-wrap: wrap;
+      gap: 3px 4px;
+      font-size: 10px;
+    }
+    .section-v4-compare .rk4-node {
+      font-size: 9px;
+      padding: 2px 4px;
+    }
+    .section-v4-compare .rk4-arr { font-size: 10px; }
+    .section-v4-compare .rk4-highlight { font-size: 9px; }
+    .section-v4-compare .rk4-sub { font-size: 10px; line-height: 1.4; }
+    .v4-compare-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.75;
+      max-width: 920px;
+    }
+    .v4-compare-list code {
+      font-size: 11px;
+      background: #f3f5f9;
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: #445;
+    }
 
     .rk5-bg {
       position: absolute; inset: 0;
@@ -572,6 +734,7 @@
   <button type="button" id="btn-export-moq" class="secondary">MOQ만 (5장)</button>
   <button type="button" id="btn-export-rocket" class="secondary">로켓 그로스만 (5장)</button>
 </div>
+<p class="download-hint">아래 시안 카드를 <strong>클릭</strong>하면 해당 시안 <strong>1장만</strong> PNG로 저장됩니다. 위 버튼은 일괄 저장입니다. (<code>http://localhost</code> 등으로 열었을 때)</p>
 
 <div class="editor-panel">
   <details>
@@ -795,6 +958,248 @@
     </div>
 
   </div>
+</div>
+
+<div class="section section-v4-compare">
+  <div class="section-header">
+    <div class="section-title">참고 · V4 블루 필터 농도 (6단계)</div>
+    <div class="section-sub">MOQ V4 · 로켓 V4 동일 기준</div>
+  </div>
+  <p class="v4-compare-intro">
+    아래 ①~⑥은 같은 레이아웃에서 <strong>파란 그라데이션만</strong> 단계별로 연하게 조정한 예시입니다.
+    위쪽 본문 시안의 V4 카드는 <strong>③ 보통</strong>과 같습니다. PNG 일괄 저장에는 포함되지 않습니다.
+    <strong>썸네일을 클릭</strong>하면 해당 단계만 PNG로 저장됩니다 (<code>http://localhost</code> 등으로 열었을 때).
+  </p>
+
+  <div class="v4-compare-block">
+    <div class="v4-compare-block-title">MOQ V4 · 블루 브랜드</div>
+    <div class="v4-compare-grid">
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>①</em> 진한<span class="v4-step-sub">초기에 쓰던 강한 톤에 가깝게</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_MOQ_1진한">
+          <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+          <div class="moq4-overlay moq4-overlay--L1"></div>
+          <div class="moq4-content">
+            <div class="moq4-title">부담 없는<br>MOQ</div>
+            <div class="moq4-sub">소량 주문도 OK<br>최소 수량 없이 바로 시작</div>
+            <div class="moq4-btn">준비 중</div>
+          </div>
+          <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>②</em> 중간<span class="v4-step-sub">①과 ③ 사이</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_MOQ_2중간">
+          <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+          <div class="moq4-overlay moq4-overlay--L2"></div>
+          <div class="moq4-content">
+            <div class="moq4-title">부담 없는<br>MOQ</div>
+            <div class="moq4-sub">소량 주문도 OK<br>최소 수량 없이 바로 시작</div>
+            <div class="moq4-btn">준비 중</div>
+          </div>
+          <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>③</em> 보통<span class="v4-step-sub">현재 본문 V4 적용</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_MOQ_3보통">
+          <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+          <div class="moq4-overlay"></div>
+          <div class="moq4-content">
+            <div class="moq4-title">부담 없는<br>MOQ</div>
+            <div class="moq4-sub">소량 주문도 OK<br>최소 수량 없이 바로 시작</div>
+            <div class="moq4-btn">준비 중</div>
+          </div>
+          <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>④</em> 연함<span class="v4-step-sub">③보다 옅게 · 배경 잘 보임</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_MOQ_4연함">
+          <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+          <div class="moq4-overlay moq4-overlay--L4"></div>
+          <div class="moq4-content">
+            <div class="moq4-title">부담 없는<br>MOQ</div>
+            <div class="moq4-sub">소량 주문도 OK<br>최소 수량 없이 바로 시작</div>
+            <div class="moq4-btn">준비 중</div>
+          </div>
+          <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>⑤</em> 더 연함<span class="v4-step-sub">④보다 한 단계</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_MOQ_5더연함">
+          <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+          <div class="moq4-overlay moq4-overlay--L5"></div>
+          <div class="moq4-content">
+            <div class="moq4-title">부담 없는<br>MOQ</div>
+            <div class="moq4-sub">소량 주문도 OK<br>최소 수량 없이 바로 시작</div>
+            <div class="moq4-btn">준비 중</div>
+          </div>
+          <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>⑥</em> 최연함<span class="v4-step-sub">가장 옅음 · 흰 글자 대비 약해질 수 있음</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_MOQ_6최연함">
+          <img src="assets/moq-heatpress-bg.png" alt="" data-bg="moq">
+          <div class="moq4-overlay moq4-overlay--L6"></div>
+          <div class="moq4-content">
+            <div class="moq4-title">부담 없는<br>MOQ</div>
+            <div class="moq4-sub">소량 주문도 OK<br>최소 수량 없이 바로 시작</div>
+            <div class="moq4-btn">준비 중</div>
+          </div>
+          <div class="top-tag">나만의 브랜드 쉽게 만들기</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="v4-compare-block">
+    <div class="v4-compare-block-title">로켓 그로스 V4 · 블루 루트</div>
+    <div class="v4-compare-grid">
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>①</em> 진한</div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_Rocket_1진한">
+          <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+          <div class="rk4-overlay rk4-overlay--L1"></div>
+          <div class="rk4-content">
+            <div class="rk4-title">로켓 그로스<br>논스톱 서비스</div>
+            <div class="rk4-route">
+              <div class="rk4-node">중국창고</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">슈닝</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">쿠팡</div>
+              <div class="rk4-highlight">DIRECT</div>
+            </div>
+            <div class="rk4-sub">중국에서 쿠팡 창고까지<br>다이렉트로 한 번에!</div>
+          </div>
+          <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>②</em> 중간</div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_Rocket_2중간">
+          <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+          <div class="rk4-overlay rk4-overlay--L2"></div>
+          <div class="rk4-content">
+            <div class="rk4-title">로켓 그로스<br>논스톱 서비스</div>
+            <div class="rk4-route">
+              <div class="rk4-node">중국창고</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">슈닝</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">쿠팡</div>
+              <div class="rk4-highlight">DIRECT</div>
+            </div>
+            <div class="rk4-sub">중국에서 쿠팡 창고까지<br>다이렉트로 한 번에!</div>
+          </div>
+          <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>③</em> 보통<span class="v4-step-sub">현재 본문 V4 적용</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_Rocket_3보통">
+          <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+          <div class="rk4-overlay"></div>
+          <div class="rk4-content">
+            <div class="rk4-title">로켓 그로스<br>논스톱 서비스</div>
+            <div class="rk4-route">
+              <div class="rk4-node">중국창고</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">슈닝</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">쿠팡</div>
+              <div class="rk4-highlight">DIRECT</div>
+            </div>
+            <div class="rk4-sub">중국에서 쿠팡 창고까지<br>다이렉트로 한 번에!</div>
+          </div>
+          <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>④</em> 연함<span class="v4-step-sub">③보다 옅게</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_Rocket_4연함">
+          <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+          <div class="rk4-overlay rk4-overlay--L4"></div>
+          <div class="rk4-content">
+            <div class="rk4-title">로켓 그로스<br>논스톱 서비스</div>
+            <div class="rk4-route">
+              <div class="rk4-node">중국창고</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">슈닝</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">쿠팡</div>
+              <div class="rk4-highlight">DIRECT</div>
+            </div>
+            <div class="rk4-sub">중국에서 쿠팡 창고까지<br>다이렉트로 한 번에!</div>
+          </div>
+          <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>⑤</em> 더 연함</div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_Rocket_5더연함">
+          <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+          <div class="rk4-overlay rk4-overlay--L5"></div>
+          <div class="rk4-content">
+            <div class="rk4-title">로켓 그로스<br>논스톱 서비스</div>
+            <div class="rk4-route">
+              <div class="rk4-node">중국창고</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">슈닝</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">쿠팡</div>
+              <div class="rk4-highlight">DIRECT</div>
+            </div>
+            <div class="rk4-sub">중국에서 쿠팡 창고까지<br>다이렉트로 한 번에!</div>
+          </div>
+          <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+      <div class="v4-compare-col">
+        <div class="v4-compare-step"><em>⑥</em> 최연함<span class="v4-step-sub">가장 옅음</span></div>
+        <div class="v4-preview-card" role="button" tabindex="0" title="클릭하면 이 단계 PNG 저장" data-download-name="V4참고_Rocket_6최연함">
+          <img src="assets/rocket-cart-bg.png" alt="" data-bg="rocket">
+          <div class="rk4-overlay rk4-overlay--L6"></div>
+          <div class="rk4-content">
+            <div class="rk4-title">로켓 그로스<br>논스톱 서비스</div>
+            <div class="rk4-route">
+              <div class="rk4-node">중국창고</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">슈닝</div>
+              <div class="rk4-arr">→</div>
+              <div class="rk4-node">쿠팡</div>
+              <div class="rk4-highlight">DIRECT</div>
+            </div>
+            <div class="rk4-sub">중국에서 쿠팡 창고까지<br>다이렉트로 한 번에!</div>
+          </div>
+          <div class="top-tag">쿠팡 로켓 그로스 입고</div>
+        </div>
+        <div class="v4-preview-hint">클릭 → PNG 저장</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="v4-compare-block-title" style="margin-bottom:8px;">수치 요약 (그라데이션 rgba 알파)</p>
+  <ul class="v4-compare-list">
+    <li><strong>MOQ V4</strong> — 120deg · 왼쪽 <code>rgba(0,60,140,α)</code> / 중간 <code>rgba(0,130,255,α)</code> 60% / 오른쪽 <code>rgba(0,0,0,α)</code><br>
+      ① 0.93 / 0.52 / 0.15 → ② 0.86 / 0.45 / 0.13 → ③ <strong>0.78 / 0.38 / 0.12</strong> (본문) → ④ 0.65 / 0.28 / 0.08 → ⑤ 0.52 / 0.20 / 0.05 → ⑥ 0.40 / 0.12 / 0.03</li>
+    <li><strong>로켓 V4</strong> — 110deg · 왼쪽 동일 / 중간 <code>rgba(0,149,255,α)</code> 50% / 오른쪽 동일<br>
+      ① 0.93 / 0.55 / 0.15 → ② 0.86 / 0.46 / 0.13 → ③ <strong>0.78 / 0.38 / 0.12</strong> (본문) → ④ 0.65 / 0.28 / 0.08 → ⑤ 0.52 / 0.20 / 0.05 → ⑥ 0.40 / 0.12 / 0.03</li>
+  </ul>
 </div>
 
 <script>
@@ -1114,21 +1519,23 @@
     }
   }
 
-  async function exportOneCard(card) {
+  async function exportElementAsPng(el, filename) {
     if (typeof html2canvas !== 'function') {
       throw new Error('html2canvas 를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.');
     }
-    var name = getExportName(card);
-    await withBlobImageSources(card, async function () {
-      var canvas = await html2canvas(card, {
+    await withBlobImageSources(el, async function () {
+      var canvas = await html2canvas(el, {
         scale: 2,
         useCORS: true,
         allowTaint: false,
         backgroundColor: null,
         logging: false,
         onclone: function (clonedDoc) {
-          clonedDoc.querySelectorAll('.card').forEach(function (el) {
-            el.style.transform = 'none';
+          clonedDoc.querySelectorAll('.card').forEach(function (node) {
+            node.style.transform = 'none';
+          });
+          clonedDoc.querySelectorAll('.v4-preview-card').forEach(function (node) {
+            node.style.transform = 'none';
           });
           clonedDoc.querySelectorAll('img').forEach(function (img) {
             img.style.transform = 'none';
@@ -1138,13 +1545,79 @@
       var dataUrl = canvas.toDataURL('image/png');
       var a = document.createElement('a');
       a.href = dataUrl;
-      a.download = '슈닝배너_' + name + '.png';
+      a.download = '슈닝배너_' + filename + '.png';
       a.rel = 'noopener';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
     });
   }
+
+  async function exportOneCard(card) {
+    await exportElementAsPng(card, getExportName(card));
+  }
+
+  function initV4PreviewDownload() {
+    var section = document.querySelector('.section-v4-compare');
+    if (!section) return;
+
+    function runExport(preview) {
+      var name = preview.getAttribute('data-download-name');
+      if (!name) return;
+      if (!assertHttpPage()) return;
+      exportElementAsPng(preview, name).catch(function (err) {
+        console.error(err);
+        var msg = err && err.message ? err.message : String(err);
+        if (msg.indexOf('Tainted') !== -1 || msg.indexOf('toDataURL') !== -1) {
+          msg +=
+            '\n\n→ 페이지를 http://localhost 로 열었는지 확인하세요. ' +
+            'file:// 로 열면 저장할 수 없습니다.';
+        }
+        alert('PNG 저장에 실패했습니다.\n\n' + msg);
+      });
+    }
+
+    section.addEventListener('click', function (e) {
+      var preview = e.target.closest('.v4-preview-card');
+      if (!preview || !section.contains(preview)) return;
+      e.preventDefault();
+      runExport(preview);
+    });
+
+    section.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var preview = e.target.closest('.v4-preview-card');
+      if (!preview || !section.contains(preview)) return;
+      e.preventDefault();
+      runExport(preview);
+    });
+  }
+
+  initV4PreviewDownload();
+
+  function initMainCardClickDownload() {
+    document.querySelectorAll('.card[data-export]').forEach(function (card) {
+      card.setAttribute('title', '클릭하면 이 시안 PNG 저장');
+    });
+    document.body.addEventListener('click', function (e) {
+      if (e.target.closest('a[href]')) return;
+      var card = e.target.closest('.card[data-export]');
+      if (!card) return;
+      if (!assertHttpPage()) return;
+      exportOneCard(card).catch(function (err) {
+        console.error(err);
+        var msg = err && err.message ? err.message : String(err);
+        if (msg.indexOf('Tainted') !== -1 || msg.indexOf('toDataURL') !== -1) {
+          msg +=
+            '\n\n→ 페이지를 http://localhost 로 열었는지 확인하세요. ' +
+            'file:// 로 열면 저장할 수 없습니다.';
+        }
+        alert('PNG 저장에 실패했습니다.\n\n' + msg);
+      });
+    });
+  }
+
+  initMainCardClickDownload();
 
   async function exportCards(cards, setBusy) {
     if (!assertHttpPage()) return;
